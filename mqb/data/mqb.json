@@ -1,0 +1,553 @@
+{
+  "users": [
+    {
+      "id": "cf4b8c91-f0d3-43f4-b8a5-abc08e0357a5",
+      "email": "admin@mqb.local",
+      "password_hash": "$2a$10$92mBj2Lal5G9/sHIoLrmaOqW7mowKF70w/Odmr4JIDNFmijr/TinO",
+      "first_name": "Admin",
+      "last_name": "MQB",
+      "role": "admin",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=admin",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "4d485c9d-fe09-46e6-81b4-64650eed4ed9",
+      "email": "prof.martin@mqb.local",
+      "password_hash": "$2a$10$jWT901h3hIpY7gYO/bc/JemdPU7vPtaQo42G1jcitoDfU1k0NF.EG",
+      "first_name": "Martin",
+      "last_name": "Dupont",
+      "role": "teacher",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=martin",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "40c4be86-e220-44d4-92cd-8a1a95665746",
+      "email": "prof.sophie@mqb.local",
+      "password_hash": "$2a$10$zwqP6egYNXnFG7CYgSUM4OgLA6oXbKeRgH/AqEe825nodlsCAm8Za",
+      "first_name": "Sophie",
+      "last_name": "Bernard",
+      "role": "teacher",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=sophie",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "email": "etudiant1@mqb.local",
+      "password_hash": "$2a$10$uR2iPanwmmQzuMaF/jz5MeMDV8oYAVBCYw3jZGvem6/XKM1b6.V72",
+      "first_name": "Alice",
+      "last_name": "Martin",
+      "role": "student",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "email": "etudiant2@mqb.local",
+      "password_hash": "$2a$10$Da.oA42l4p/zyr0WWWaBX.qWZ6ll7qIYmhSqix6RfSUi7SrzxxUCm",
+      "first_name": "Bob",
+      "last_name": "Durand",
+      "role": "student",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "email": "etudiant3@mqb.local",
+      "password_hash": "$2a$10$461VqeCW6abMskbCDrM6e.kv9Mp8Vfn4ldG038QjvmdL7S/shIhSW",
+      "first_name": "Claire",
+      "last_name": "Lefevre",
+      "role": "student",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=Claire",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "email": "etudiant4@mqb.local",
+      "password_hash": "$2a$10$0bT5k3o1CW9o5H1HyJEyX.gR3SdAcKq5NXadETXsy3pzHSvZPbrXO",
+      "first_name": "David",
+      "last_name": "Moreau",
+      "role": "student",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=David",
+      "is_active": 1,
+      "created_at": 1775426151
+    },
+    {
+      "id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "email": "etudiant5@mqb.local",
+      "password_hash": "$2a$10$h2jDXgU0V3uJPpIl/CZLjenlFfzjgr07zCACUneDeZ3gHQY.5Ka/G",
+      "first_name": "Emma",
+      "last_name": "Garcia",
+      "role": "student",
+      "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma",
+      "is_active": 1,
+      "created_at": 1775426151
+    }
+  ],
+  "password_reset_tokens": [],
+  "groups": [
+    {
+      "id": "f328fef8-bb62-4975-a6b5-e7f970318e14",
+      "name": "Groupe A - Informatique",
+      "description": "Classe de première année informatique",
+      "capacity": 30,
+      "created_at": 1775426151
+    },
+    {
+      "id": "f7ebefcb-d91d-4f34-b59c-538a6cbedfac",
+      "name": "Groupe B - Réseaux",
+      "description": "Classe deuxième année réseaux",
+      "capacity": 25,
+      "created_at": 1775426151
+    }
+  ],
+  "group_members": [
+    {
+      "id": "46e76223-1edf-458b-91eb-0846ef9d8fa9",
+      "group_id": "f328fef8-bb62-4975-a6b5-e7f970318e14",
+      "user_id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "joined_at": 1775426151
+    },
+    {
+      "id": "a124673e-93e9-4af3-a586-5fe3a94c435a",
+      "group_id": "f328fef8-bb62-4975-a6b5-e7f970318e14",
+      "user_id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "joined_at": 1775426151
+    },
+    {
+      "id": "ce3d325d-f61b-4b80-8e24-32c73287bc95",
+      "group_id": "f328fef8-bb62-4975-a6b5-e7f970318e14",
+      "user_id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "joined_at": 1775426151
+    },
+    {
+      "id": "2184ccff-2d71-4025-8022-596dc7e760c5",
+      "group_id": "f7ebefcb-d91d-4f34-b59c-538a6cbedfac",
+      "user_id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "joined_at": 1775426151
+    },
+    {
+      "id": "eacec376-3bd9-406d-92e4-fcd541e2b5b3",
+      "group_id": "f7ebefcb-d91d-4f34-b59c-538a6cbedfac",
+      "user_id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "joined_at": 1775426151
+    }
+  ],
+  "rooms": [
+    {
+      "id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "name": "Salle 101",
+      "capacity": 30,
+      "type": "classroom",
+      "created_at": 1775426151
+    },
+    {
+      "id": "669e4ed9-8200-476a-b37c-3989f8be70f4",
+      "name": "Labo Info",
+      "capacity": 20,
+      "type": "lab",
+      "created_at": 1775426151
+    },
+    {
+      "id": "d5559940-6412-4890-8f4b-95ab0a9514ea",
+      "name": "Amphithéâtre",
+      "capacity": 100,
+      "type": "auditorium",
+      "created_at": 1775426151
+    }
+  ],
+  "constraints": [
+    {
+      "id": "9897cd8f-1713-4357-b070-c0581a97081f",
+      "teacher_id": "4d485c9d-fe09-46e6-81b4-64650eed4ed9",
+      "day_of_week": 1,
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "is_available": 0,
+      "created_at": 1775426151
+    }
+  ],
+  "courses": [
+    {
+      "id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "code": "INFO101",
+      "name": "Fondamentaux de la Programmation",
+      "description": "Introduction à la programmation en Python et JavaScript",
+      "teacher_id": "4d485c9d-fe09-46e6-81b4-64650eed4ed9",
+      "group_id": "f328fef8-bb62-4975-a6b5-e7f970318e14",
+      "hours_total": 30,
+      "created_at": 1775426151
+    },
+    {
+      "id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "code": "NET201",
+      "name": "Administration Réseaux",
+      "description": "Configuration et gestion de réseaux informatiques",
+      "teacher_id": "40c4be86-e220-44d4-92cd-8a1a95665746",
+      "group_id": "f7ebefcb-d91d-4f34-b59c-538a6cbedfac",
+      "hours_total": 40,
+      "created_at": 1775426151
+    }
+  ],
+  "schedules": [
+    {
+      "id": "c8e9371a-51ec-44e9-8b65-23cb4787d7ea",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 0,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-06",
+      "end_date": "2026-04-06",
+      "created_at": 1775426151
+    },
+    {
+      "id": "2d51305b-2c6a-48dd-99c6-0cbae5f5b46b",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "room_id": "669e4ed9-8200-476a-b37c-3989f8be70f4",
+      "day_of_week": 1,
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "start_date": "2026-04-07",
+      "end_date": "2026-04-07",
+      "created_at": 1775426151
+    },
+    {
+      "id": "2de41b57-7311-4211-a70c-fb8e6736eba3",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 2,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-08",
+      "end_date": "2026-04-08",
+      "created_at": 1775426151
+    },
+    {
+      "id": "67b4144d-8102-43e2-8ee3-d64f9e23e24b",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "room_id": "669e4ed9-8200-476a-b37c-3989f8be70f4",
+      "day_of_week": 3,
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "start_date": "2026-04-09",
+      "end_date": "2026-04-09",
+      "created_at": 1775426151
+    },
+    {
+      "id": "a66e9134-a6b3-432a-8c6b-8a4fa6490a5b",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 4,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-10",
+      "created_at": 1775426151
+    },
+    {
+      "id": "765a11f1-3d88-4678-bb62-095f249d2725",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 0,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-13",
+      "end_date": "2026-04-13",
+      "created_at": 1775426151
+    },
+    {
+      "id": "599a3aef-3ae2-445d-b043-381b95017821",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "room_id": "669e4ed9-8200-476a-b37c-3989f8be70f4",
+      "day_of_week": 1,
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "start_date": "2026-04-14",
+      "end_date": "2026-04-14",
+      "created_at": 1775426151
+    },
+    {
+      "id": "6b95667a-6b78-48ab-b278-e3f708795ed2",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 2,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-15",
+      "end_date": "2026-04-15",
+      "created_at": 1775426151
+    },
+    {
+      "id": "32c6ebcc-99c8-43e1-b895-5cdb4416de1c",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "room_id": "669e4ed9-8200-476a-b37c-3989f8be70f4",
+      "day_of_week": 3,
+      "start_time": "14:00",
+      "end_time": "16:00",
+      "start_date": "2026-04-16",
+      "end_date": "2026-04-16",
+      "created_at": 1775426151
+    },
+    {
+      "id": "152693dd-6548-4c14-bf1d-6fd015f90151",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "room_id": "fae7f5ff-14f0-4763-8635-ce97fd63168c",
+      "day_of_week": 4,
+      "start_time": "09:00",
+      "end_time": "11:00",
+      "start_date": "2026-04-17",
+      "end_date": "2026-04-17",
+      "created_at": 1775426151
+    }
+  ],
+  "attendance": [],
+  "absences": [
+    {
+      "id": "567810db-ba20-4b93-b561-fffd2ff3bf8a",
+      "student_id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "count": 0,
+      "justified": 0,
+      "reason": "Raison non spécifiée",
+      "created_at": 1775426151
+    },
+    {
+      "id": "f1060880-f3a0-49af-8dc6-81f4621d9b77",
+      "student_id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "count": 2,
+      "justified": 1,
+      "reason": "Raison non spécifiée",
+      "created_at": 1775426151
+    },
+    {
+      "id": "d28c71a6-b36d-425b-bf91-ff500f3259d6",
+      "student_id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "count": 1,
+      "justified": 0,
+      "reason": "Raison non spécifiée",
+      "created_at": 1775426151
+    },
+    {
+      "id": "d0153d59-085d-4973-abdd-fe784c6b1031",
+      "student_id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "count": 2,
+      "justified": 0,
+      "reason": "Raison non spécifiée",
+      "created_at": 1775426151
+    },
+    {
+      "id": "208431f7-cf31-42fc-a941-a64deee65c5e",
+      "student_id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "count": 0,
+      "justified": 0,
+      "reason": "Raison non spécifiée",
+      "created_at": 1775426151
+    }
+  ],
+  "grades": [
+    {
+      "id": "21530aae-14e4-4b78-a988-39e84b5f94de",
+      "student_id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "score": 19.467742136625688,
+      "feedback": "Bon travail et participation active en cours.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "d80d8080-4e73-44a0-a074-03ceaa96addd",
+      "student_id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "score": 14.815517815973239,
+      "feedback": "Progrès notables dans la maîtrise des concepts.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "51838678-df7a-4a9a-b7f9-a21f93bd964a",
+      "student_id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "score": 18.44923476463579,
+      "feedback": "Bon travail et participation active en cours.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "e99dc11b-a0d5-42ec-b9b9-5e8f3e26e4ed",
+      "student_id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "score": 14.10957016162594,
+      "feedback": "Progrès notables dans la maîtrise des concepts.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "dc47d118-1613-4878-bda5-476600cc4efd",
+      "student_id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "score": 18.332176882335638,
+      "feedback": "Bon travail et participation active en cours.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "231e6cb4-3a9b-4ea3-9628-78518847bbf6",
+      "student_id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "score": 14.061690072271926,
+      "feedback": "Progrès notables dans la maîtrise des concepts.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "7cc9c25f-6f53-426e-878a-e5e6dde4d8e2",
+      "student_id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "score": 17.05057321590352,
+      "feedback": "Bon travail et participation active en cours.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "f2517e8d-52a0-44c4-bb2c-359aef11538d",
+      "student_id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "score": 16.810086586474597,
+      "feedback": "Progrès notables dans la maîtrise des concepts.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "350b0943-ce25-4385-8d11-19d25f9d7e38",
+      "student_id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "course_id": "e311468d-f0d7-406a-9bb5-f204d80cf29b",
+      "score": 14.283789939828367,
+      "feedback": "Bon travail et participation active en cours.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "7a3126c3-5ec5-4b75-95cc-dec0852d46ec",
+      "student_id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "course_id": "bdc9c0f7-8df0-4220-b095-f80abcf2c925",
+      "score": 16.29073249074829,
+      "feedback": "Progrès notables dans la maîtrise des concepts.",
+      "created_at": 1775426151,
+      "updated_at": 1775426151
+    }
+  ],
+  "documents": [],
+  "messages": [],
+  "broadcast_recipients": [],
+  "requests": [],
+  "wifi_codes": [
+    {
+      "id": "af8db0ab-4902-4d17-bb13-5f4c0a5feb70",
+      "code": "87206955",
+      "network_name": "MQB-Guest",
+      "expires_at": 1776030950,
+      "is_active": 1,
+      "created_at": 1775426151
+    }
+  ],
+  "settings": [
+    {
+      "id": "c6b6a603-d9d3-41dc-923d-301349840c6e",
+      "key": "school_name",
+      "value": "MQB - Centre de Formation",
+      "updated_at": 1775426151
+    },
+    {
+      "id": "751ed7b8-a5f5-4f48-8bbe-4c9d89e862b8",
+      "key": "school_email",
+      "value": "contact@mqb.local",
+      "updated_at": 1775426151
+    }
+  ],
+  "user_settings": [
+    {
+      "id": "835dddcf-ae53-4383-b7ef-10ddff6bef0a",
+      "user_id": "cf4b8c91-f0d3-43f4-b8a5-abc08e0357a5",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "2da9cbd6-7ecc-4724-9254-6aee09d6694b",
+      "user_id": "4d485c9d-fe09-46e6-81b4-64650eed4ed9",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "29370ba8-c6f2-4331-a62e-4d37835817ef",
+      "user_id": "40c4be86-e220-44d4-92cd-8a1a95665746",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "f33108ec-0e9d-4374-8b17-a25cb9693d84",
+      "user_id": "e8cad52b-9a61-4836-b2a7-0de586b85d08",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "14f35f63-8a87-4a56-b491-74b5ab99e15d",
+      "user_id": "e6cd421e-75fd-4650-aa44-7ad76b9697ea",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "e84c38aa-2cd8-4f69-90cf-4f853fad9c84",
+      "user_id": "fc6bc135-297e-4525-bb9c-72dc15ed643a",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "b4ea50b4-2fa4-4b9c-bd6a-6184833da8e6",
+      "user_id": "b974d16f-e26c-4874-8a4c-e08cf7172fab",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    },
+    {
+      "id": "e1ecafdc-f1eb-447b-b9ca-2d1af228eb90",
+      "user_id": "0edf0e50-c77b-4b5f-8401-c6685c3dba99",
+      "theme": "dark",
+      "font_size": 16,
+      "language": "fr",
+      "email_notifications": 1,
+      "updated_at": 1775426151
+    }
+  ],
+  "activity_logs": [],
+  "user_sessions": []
+}
