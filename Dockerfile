@@ -2,8 +2,9 @@
 FROM node:20-bookworm AS builder
 WORKDIR /app
 
-COPY mqb/package*.json ./
-RUN npm ci
+COPY mqb/package.json ./
+COPY mqb/package-lock.json ./
+RUN npm install
 
 COPY mqb/ .
 
@@ -21,8 +22,9 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-COPY mqb/package*.json ./
-RUN npm ci --omit=dev
+COPY mqb/package.json ./
+COPY mqb/package-lock.json ./
+RUN npm install --omit=dev
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
