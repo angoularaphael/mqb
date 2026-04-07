@@ -15,9 +15,9 @@
     "db:push": "npx drizzle-kit push:sqlite",
     "db:migrate": "tsx src/db/migrate.ts",
     "db:studio": "drizzle-kit studio",
-    "bootstrap": "tsx --env-file=.env src/bootstrap.ts",
+    "bootstrap": "tsx src/bootstrap.ts",
     "seed": "npm run bootstrap",
-    "ensure-super-admin": "tsx --env-file=.env src/ensure-super-admin.ts"
+    "ensure-super-admin": "tsx src/ensure-super-admin.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
