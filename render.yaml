@@ -14,7 +14,7 @@ services:
       - key: DATABASE_URL
         value: file:./data/mqb.db
       - key: NEXTAUTH_SECRET
-        value: your-secret-key-here
+        value: mqb-dev-jwt-secret-changez-moi-en-production-2026
       - key: NEXTAUTH_URL
         value: https://mieux-que-brad.onrender.com
       - key: PORT
