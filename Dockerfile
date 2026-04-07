@@ -39,4 +39,4 @@ EXPOSE 3000
 ENV PORT=3000
 ENV HOSTNAME=0.0.0.0
 
-CMD ["sh", "-c", "npx tsx src/db/migrate.ts && npm run start"]
+CMD ["sh", "-c", "cd /app && npx tsx src/db/migrate.ts && npm run bootstrap && npm run start"]
