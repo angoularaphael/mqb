@@ -1,25 +1,24 @@
 services:
   - type: web
     name: mieux-que-brad
-    env: node
+    runtime: node
     plan: free
     buildCommand: >
       cd mqb &&
-      npm install &&
+      npm install --legacy-peer-deps &&
       npm run build
     startCommand: "cd mqb && npm run start"
-    routes:
-      - path: "/*"
-        destination: http://localhost:3000
     envVars:
       - key: NODE_ENV
         value: production
       - key: DATABASE_URL
-        value: file:./mqb.db
+        value: file:./data/mqb.db
       - key: NEXTAUTH_SECRET
-        generateValue: true
+        value: your-secret-key-here
       - key: NEXTAUTH_URL
         value: https://mieux-que-brad.onrender.com
+      - key: PORT
+        value: 3000
     disk:
       name: sqlite-data
       mountPath: /opt/render/project/mqb/data
