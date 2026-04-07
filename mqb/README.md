@@ -2,9 +2,30 @@
 
 Une plateforme complète et professionnelle de gestion d'école avec authentification réelle, emplois du temps dynamiques, gestion des absences, notes, messagerie et bien plus.
 
+## 🌐 Déploiement en Production
+
+**🚀 Application en ligne :** https://mieux-que-brad.onrender.com
+
+---
+
+## 📝 Informations de Connexion
+
+### Compte Administrateur
+```
+Email    : giffareno05@gmail.com
+Mot de passe : 12345678
+```
+
+### Test d'Email (pour notifications)
+```
+Email : suzinabot@gmail.com
+```
+
+---
+
 ## 🚀 Stack Technique
 
-- **Next.js 15** (App Router) + TypeScript
+- **Next.js 14** (App Router) + TypeScript
 - **Tailwind CSS** + shadcn/ui + Lucide Icons
 - **Framer Motion** pour les animations premium
 - **Drizzle ORM** + SQLite 3
@@ -26,22 +47,39 @@ npm install
 pnpm install
 ```
 
-### 2. Configuration Gmail SMTP
+### 2. Configuration Environnement (.env.local)
 
-Pour l'envoi d'emails réels, configurez votre compte Gmail :
-
-1. Allez sur [Google Account](https://myaccount.google.com/)
-2. Accédez à **Sécurité** > **App Passwords**
-3. Générez un App Password
-4. Créez un fichier `.env.local` :
+Créez un fichier `.env.local` avec vos variables :
 
 ```env
-DATABASE_URL="file:./database.db"
+# Base de données
+DATABASE_URL=file:./data/mqb.db
+
+# Authentification
+JWT_SECRET=votre-clé-secrète-super-longue-ici
+NEXTAUTH_SECRET=votre-secret-auth-long-ici
+NEXTAUTH_URL=http://localhost:3000
+
+# Admin par défaut
+BOOTSTRAP_ADMIN_EMAIL=giffareno05@gmail.com
+BOOTSTRAP_ADMIN_PASSWORD=12345678
+
+# Email (Gmail SMTP)
 EMAIL_USER=suzinabot@gmail.com
-EMAIL_PASS=votre_app_password_ici
-JWT_SECRET=votre_secret_jwt_super_long_ici
+EMAIL_PASS=xxxx xxxx xxxx xxxx  # App Password, pas le mot de passe Gmail normal
+
+# Application
+NEXT_PUBLIC_APP_NAME=MQB
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+EMAIL_FROM_NAME=MQB System
+EMAIL_FROM_EMAIL=suzinabot@gmail.com
 ```
+
+**⚠️ Important pour Gmail :**
+1. Allez sur [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords)
+2. Sélectionnez "Mail" et "Windows Computer"
+3. Copiez le mot de passe généré (16 caractères)
+4. Collez-le dans `EMAIL_PASS` (sans espaces de séparation)
 
 ### 3. Initialiser la base de données
 
@@ -49,8 +87,8 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 # Créer le schéma et les migrations
 npm run db:push
 
-# Remplir avec des données de démonstration
-npm run seed
+# Créer le compte admin initial
+npm run bootstrap
 ```
 
 ### 4. Démarrer le serveur de développement
@@ -59,26 +97,79 @@ npm run seed
 npm run dev
 ```
 
-Ouvrez [http://localhost:3000](http://localhost:3000)
+Ouvrez [http://localhost:3000](http://localhost:3000) et connectez-vous avec :
+```
+Email : giffareno05@gmail.com
+Mot de passe : 12345678
+```
 
-## 📝 Identifiants de Test
+---
 
-Après le seed, utilisez ces identifiants pour tester :
+## 🚀 Déploiement sur Render
 
-### Admin
-- **Email:** admin@mqb.local
-- **Password:** MQB@2024!
+### Prerequisites
+- Repository GitHub avec votre code
+- Compte Render gratuit (render.com)
 
-### Professeur
-- **Email:** prof.martin@mqb.local
-- **Password:** MQB@2024!
+### Étapes
 
-### Étudiant
-- **Email:** etudiant1@mqb.local
-- **Password:** MQB@2024!
+1. **Créer un Web Service sur Render**
+   - Aller sur [render.com](https://render.com)
+   - Cliquer **New +** → **Web Service**
+   - Connecter GitHub et sélectionner votre repo
+   - Runtime : **Docker**
 
-### Code WiFi
-- Généré automatiquement lors du seed (affiché dans la console)
+2. **Variables d'Environnement**
+   ```
+   DATABASE_URL=file:./data/mqb.db
+   NODE_ENV=production
+   NEXTAUTH_URL=https://votre-app.onrender.com
+   NEXTAUTH_SECRET=(Générer une clé aléatoire)
+   JWT_SECRET=(Générer une clé aléatoire)
+   BOOTSTRAP_ADMIN_EMAIL=giffareno05@gmail.com
+   BOOTSTRAP_ADMIN_PASSWORD=12345678
+   EMAIL_USER=suzinabot@gmail.com
+   EMAIL_PASS=(Votre App Password Gmail)
+   NEXT_PUBLIC_APP_NAME=MQB
+   NEXT_PUBLIC_APP_URL=https://votre-app.onrender.com
+   EMAIL_FROM_NAME=MQB System
+   EMAIL_FROM_EMAIL=suzinabot@gmail.com
+   ```
+
+3. **Persistent Disk** (pour SQLite)
+   - Mount Path : `/opt/render/project/mqb/data`
+   - Size : 1 GB
+
+4. **Déployer**
+   - Cliquer **Create Web Service**
+   - Attendre ~10-15 minutes pour le build
+
+### Accès à l'Application
+```
+https://votre-app.onrender.com
+Email : giffareno05@gmail.com
+Mot de passe : 12345678
+```
+
+---
+
+## 📝 Identifiants de Connexion
+
+### Compte Super Administrateur
+```
+Email    : giffareno05@gmail.com
+Mot de passe : 12345678
+```
+
+Ce compte est créé automatiquement au premier démarrage de l'application.
+
+### Configuration Email
+```
+Email utilisé    : suzinabot@gmail.com
+Utilisé pour     : Notifications et emails système
+```
+
+Pour configurer votre propre email, mettez à jour `.env.local` :
 
 ## 🏠 Structure du Projet
 
