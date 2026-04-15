@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { AppProviders } from '@/components/app-providers';
+import { CustomCursor } from '@/components/animations/custom-cursor';
+import { IntroLoader } from '@/components/animations/intro-loader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,6 +26,8 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.className} min-h-full bg-background text-foreground`} suppressHydrationWarning>
+        <IntroLoader />
+        <CustomCursor />
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

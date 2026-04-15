@@ -7,6 +7,7 @@ import { LogOut, Settings, Zap } from 'lucide-react';
 import { logoutAction } from '@/app/actions/auth';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { RoleNavBar } from '@/components/nav-bar';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -114,6 +115,9 @@ export function AppLayoutWrapper({ children, user }: AppLayoutProps) {
           </motion.div>
         )}
       </motion.header>
+
+      {/* Role Navigation Bar */}
+      <RoleNavBar role={user?.role} />
 
       {/* Main content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

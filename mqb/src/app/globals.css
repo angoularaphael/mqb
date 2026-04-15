@@ -256,3 +256,9 @@
     font-size: 14px;
   }
 }
+
+/* Hide cursor when custom cursor active */
+.hide-cursor-global,
+.hide-cursor-global * {
+  cursor: none !important;
+}

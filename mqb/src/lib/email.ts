@@ -34,8 +34,6 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
 }
 
 export async function sendPasswordResetEmail(email: string, code: string, userName: string) {
-  const resetLink = `${process.env.NEXT_PUBLIC_APP_URL}/reset-password?code=${code}`;
-  
   const html = `
     <!DOCTYPE html>
     <html>
@@ -61,8 +59,7 @@ export async function sendPasswordResetEmail(email: string, code: string, userNa
             <p>Vous avez demandé une réinitialisation de mot de passe pour votre compte MQB.</p>
             <p>Voici votre code de vérification (valide 10 minutes) :</p>
             <div class="code-box">${code}</div>
-            <p>Ou cliquez sur le lien ci-dessous :</p>
-            <a href="${resetLink}" class="button">Réinitialiser mon mot de passe</a>
+            <p>Entrez ce code sur la page de réinitialisation de l'application pour choisir un nouveau mot de passe.</p>
             <p><strong>Important:</strong> Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.</p>
           </div>
           <div class="footer">

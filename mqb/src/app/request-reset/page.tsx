@@ -4,9 +4,11 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { requestPasswordResetAction } from '@/app/actions/auth';
 
 export default function RequestResetPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -21,8 +23,8 @@ export default function RequestResetPage() {
     try {
       const result = await requestPasswordResetAction({ email });
       if (result.success) {
-        setMessage(result.message ?? '');
-        setEmail('');
+        setMessage(result.message ?? 'Code envoyé avec succès.');
+        router.push('/reset-password');
       } else {
         setError(result.error ?? '');
       }
@@ -52,7 +54,7 @@ export default function RequestResetPage() {
 
           <h1 className="text-3xl font-bold text-white mb-2">Réinitialiser le mot de passe</h1>
           <p className="text-slate-300 mb-8">
-            Entrez votre email pour recevoir un lien de réinitialisation
+            Entrez votre email pour recevoir un code de vérification
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -102,7 +104,7 @@ export default function RequestResetPage() {
                   Envoi en cours...
                 </>
               ) : (
-                'Envoyer le lien'
+                'Envoyer le code'
               )}
             </motion.button>
           </form>

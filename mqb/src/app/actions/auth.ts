@@ -104,11 +104,11 @@ export async function requestPasswordResetAction(data: PasswordResetInput) {
 
     if (!user[0]) {
       // Don't reveal if user exists for security
-      return { success: true, message: 'Si ce compte existe, un email de réinitialisation a été envoyé' };
+      return { success: true, message: 'Si ce compte existe, un code de vérification a été envoyé' };
     }
 
-    // Generate verification code
-    const code = Math.random().toString(36).substr(2, 9).toUpperCase();
+    // Generate verification code (6 digits)
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
     const expiresAt = Math.floor(Date.now() / 1000) + 10 * 60; // 10 minutes
 
     // Delete old tokens
@@ -132,7 +132,7 @@ export async function requestPasswordResetAction(data: PasswordResetInput) {
 
     return {
       success: true,
-      message: 'Un email de réinitialisation a été envoyé. Vérifiez votre boîte de réception.',
+      message: 'Un code de vérification a été envoyé. Vérifiez votre boîte de réception.',
     };
   } catch (error) {
     console.error('Password reset request error:', error);
