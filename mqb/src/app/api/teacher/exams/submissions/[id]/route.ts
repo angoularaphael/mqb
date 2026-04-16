@@ -11,7 +11,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
       return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
     }
 
-    const { feedback, questionGrades } = await req.json(); // questionGrades: { [questionId]: points }
+    const { questionGrades } = await req.json(); // questionGrades: { [questionId]: points }
 
     // 1. Update individual points for questions (mainly open ones)
     if (questionGrades) {
