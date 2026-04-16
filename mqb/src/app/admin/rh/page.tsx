@@ -11,10 +11,8 @@ import {
   Calendar, 
   CheckCircle, 
   XCircle, 
-  Plus, 
   Clock,
-  Search,
-  ArrowRight
+  Search
 } from 'lucide-react';
 
 export default function AdminRHPage() {
