@@ -10,9 +10,7 @@ import {
   Send, 
   ChevronRight, 
   ChevronLeft, 
-  AlertCircle,
-  CheckCircle2,
-  X
+  CheckCircle2
 } from 'lucide-react';
 
 export default function TakeExamPage() {

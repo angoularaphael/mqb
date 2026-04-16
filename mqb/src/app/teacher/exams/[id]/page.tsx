@@ -12,8 +12,7 @@ import {
   User, 
   Clock, 
   Save, 
-  AlertCircle,
-  BarChart3
+  AlertCircle
 } from 'lucide-react';
 
 export default function ExamCorrectionPage() {
