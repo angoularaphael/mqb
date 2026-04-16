@@ -30,15 +30,19 @@ export async function middleware(request: NextRequest) {
 
   // Check role-based access
   if (pathname.startsWith('/admin') && payload.role !== 'admin') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   if (pathname.startsWith('/teacher') && payload.role !== 'teacher' && payload.role !== 'admin') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   if (pathname.startsWith('/student') && payload.role !== 'student' && payload.role !== 'admin') {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  if (pathname.startsWith('/parent') && payload.role !== 'parent' && payload.role !== 'admin') {
+    return NextResponse.redirect(new URL('/', request.url));
   }
 
   return NextResponse.next();

@@ -186,6 +186,16 @@ export default function StudentDashboard() {
                 <Link
                   key={m.id}
                   href="/student/messaging"
+                  onClick={async () => {
+                    if (!m.read) {
+                      try {
+                        await fetchApi('/api/messaging/mark-read', {
+                          method: 'POST',
+                          body: JSON.stringify({ messageId: m.id, type: (m as any).type === 'broadcast' ? 'broadcast' : 'direct' })
+                        });
+                      } catch (e) {}
+                    }
+                  }}
                   className={`block rounded-lg border border-border p-4 transition-colors hover:bg-muted ${
                     !m.read && !m.fromMe ? 'border-primary/40 bg-primary/5' : 'bg-card'
                   }`}

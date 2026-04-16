@@ -24,7 +24,7 @@ export function verifyToken(req, res, next) {
 
 // Login
 router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, portalType } = req.body;
   const db = req.app.locals.db;
 
   try {
@@ -37,6 +37,16 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+
+    if (portalType && user.role !== 'admin') {
+      if (portalType === 'student' && user.role !== 'student') {
+        return res.status(403).json({ error: 'Accès non autorisé au portail étudiant' });
+      }
+      if (portalType === 'teacher' && user.role !== 'teacher') {
+        return res.status(403).json({ error: 'Accès non autorisé au portail enseignant' });
+      }
+    }
+
 
     const token = jwt.sign(
       { userId: user.id, email: user.email, role: user.role },

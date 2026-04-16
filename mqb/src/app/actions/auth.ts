@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db/index';
-import { users, password_reset_tokens } from '@/db/schema';
+import { users, password_reset_tokens, parents } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { generateJWT, setAuthCookie, clearAuthCookie, getCurrentUser } from '@/lib/auth';
 import { verifyPassword, hashPassword } from '@/lib/db-client';
@@ -24,15 +24,21 @@ export async function loginAction(data: LoginInput) {
 
     const email = parsed.data.email.trim().toLowerCase();
     const password = parsed.data.password;
-    const user = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    const portalType = parsed.data.portalType;
 
-    if (!user[0]) {
+    let userObj: any = null;
+
+    const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    if (!result[0]) return { success: false, error: 'Email ou mot de passe invalide' };
+    userObj = result[0];
+
+    if (!userObj) {
       return { success: false, error: 'Email ou mot de passe invalide' };
     }
 
-    const storedHash = user[0].password_hash;
+    const storedHash = userObj.password_hash;
     if (!storedHash || typeof storedHash !== 'string') {
-      console.error('Login: utilisateur sans hash de mot de passe valide', user[0].id);
+      console.error('Login: utilisateur sans hash de mot de passe valide', userObj.id);
       return { success: false, error: 'Compte incomplet : contactez un administrateur' };
     }
 
@@ -48,17 +54,29 @@ export async function loginAction(data: LoginInput) {
       return { success: false, error: 'Email ou mot de passe invalide' };
     }
 
-    if (!user[0].is_active) {
+    if (!userObj.is_active) {
       return { success: false, error: 'Ce compte est désactivé' };
+    }
+
+    if (portalType && userObj.role !== 'admin') {
+      if (portalType === 'student' && userObj.role !== 'student') {
+        return { success: false, error: 'Accès non autorisé au portail étudiant. Veuillez utiliser le portail enseignant.' };
+      }
+      if (portalType === 'teacher' && userObj.role !== 'teacher') {
+        return { success: false, error: 'Accès non autorisé au portail enseignant. Veuillez utiliser le portail étudiant.' };
+      }
+      if (portalType === 'parent' && userObj.role !== 'parent') {
+        return { success: false, error: 'Accès non autorisé au portail parent.' };
+      }
     }
 
     // Generate JWT token (claims strictement sérialisables pour jose)
     const token = await generateJWT({
-      userId: String(user[0].id),
-      email: String(user[0].email),
-      role: String(user[0].role ?? 'student').toLowerCase(),
-      firstName: String(user[0].first_name ?? ''),
-      lastName: String(user[0].last_name ?? ''),
+      userId: String(userObj.id),
+      email: String(userObj.email),
+      role: String(userObj.role ?? 'student').toLowerCase(),
+      firstName: String(userObj.first_name ?? ''),
+      lastName: String(userObj.last_name ?? ''),
     });
 
     // Set auth cookie
@@ -67,12 +85,12 @@ export async function loginAction(data: LoginInput) {
     return {
       success: true,
       user: {
-        id: user[0].id,
-        email: user[0].email,
-        firstName: user[0].first_name,
-        lastName: user[0].last_name,
-        role: user[0].role,
-        avatar: user[0].avatar_url,
+        id: userObj.id,
+        email: userObj.email,
+        firstName: userObj.first_name,
+        lastName: userObj.last_name,
+        role: userObj.role,
+        avatar: userObj.avatar_url,
       },
     };
   } catch (error) {

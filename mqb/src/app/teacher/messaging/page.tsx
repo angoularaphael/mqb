@@ -73,6 +73,16 @@ export default function TeacherMessagingPage() {
       `/api/teacher/messaging/thread?peerId=${encodeURIComponent(pid)}`,
     );
     setThread(d.messages);
+    // Mark as read
+    if (d.messages.length > 0) {
+      const unreadIds = d.messages.filter(m => !m.mine).map(m => m.id);
+      for (const id of unreadIds) {
+        fetchApi('/api/messaging/mark-read', {
+          method: 'POST',
+          body: JSON.stringify({ messageId: id, type: 'direct' })
+        }).catch(() => {});
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -215,7 +225,21 @@ export default function TeacherMessagingPage() {
                 <p className="text-muted-foreground text-sm">Aucune.</p>
               ) : (
                 broadcasts.map((b) => (
-                  <div key={b.id} className="p-4 rounded-lg border bg-card border-border">
+                  <div 
+                    key={b.id} 
+                    className={`p-4 rounded-lg border transition-colors ${b.isRead ? 'bg-card border-border' : 'bg-primary/5 border-primary/20 cursor-pointer hover:bg-primary/10'}`}
+                    onClick={async () => {
+                      if (!b.isRead) {
+                        try {
+                          await fetchApi('/api/messaging/mark-read', {
+                            method: 'POST',
+                            body: JSON.stringify({ messageId: b.id, type: 'broadcast' })
+                          });
+                          setBroadcasts(prev => prev.map(item => item.id === b.id ? { ...item, isRead: true } : item));
+                        } catch (e) {}
+                      }
+                    }}
+                  >
                     <p className="text-xs text-muted-foreground">{b.senderName}</p>
                     <p className="font-semibold mt-1">{b.title ?? '—'}</p>
                     <p className="text-sm mt-2 whitespace-pre-wrap">{b.content}</p>

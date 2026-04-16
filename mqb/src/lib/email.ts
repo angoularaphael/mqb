@@ -1,12 +1,21 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER || 'suzinabot@gmail.com',
-    pass: process.env.EMAIL_PASS || '',
-  },
-});
+let _transporter: ReturnType<typeof nodemailer.createTransport> | null = null;
+
+function getTransporter() {
+  if (!_transporter) {
+    const user = process.env.EMAIL_USER;
+    const pass = process.env.EMAIL_PASS;
+    if (!user || !pass) {
+      console.warn('⚠️ EMAIL_USER ou EMAIL_PASS non configuré. Les emails ne seront pas envoyés.');
+    }
+    _transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: user || '', pass: pass || '' },
+    });
+  }
+  return _transporter;
+}
 
 interface EmailOptions {
   to: string;
@@ -17,8 +26,9 @@ interface EmailOptions {
 
 export async function sendEmail(options: EmailOptions): Promise<boolean> {
   try {
-    await transporter.sendMail({
-      from: `"${process.env.EMAIL_FROM_NAME || 'MQB System'}" <${process.env.EMAIL_FROM_EMAIL || 'suzinabot@gmail.com'}>`,
+    const transport = getTransporter();
+    await transport.sendMail({
+      from: `"${process.env.EMAIL_FROM_NAME || 'MQB System'}" <${process.env.EMAIL_FROM_EMAIL || process.env.EMAIL_USER || 'noreply@mqb.com'}>`,
       to: options.to,
       subject: options.subject,
       html: options.html,
@@ -28,7 +38,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
     console.log(`✅ Email sent to ${options.to}`);
     return true;
   } catch (error) {
-    console.error('❌ Email sending failed:', error);
+    console.error('❌ Email sending failed:', error instanceof Error ? error.message : error);
     return false;
   }
 }

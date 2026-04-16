@@ -12,12 +12,14 @@ export const ROLES = {
   STUDENT: 'student',
   TEACHER: 'teacher',
   ADMIN: 'admin',
+  PARENT: 'parent',
 };
 
 export const ROLE_LABELS: Record<string, string> = {
   student: 'Étudiant',
   teacher: 'Enseignant',
   admin: 'Administrateur',
+  parent: 'Parent',
 };
 
 export const ATTENDANCE_STATUS = {
@@ -130,6 +132,8 @@ export const MENU_TEACHER = [
   { href: '/teacher/courses', label: 'Cours', icon: 'BookOpen' },
   { href: '/teacher/constraints', label: 'Contraintes', icon: 'Clock' },
   { href: '/teacher/planning', label: 'Emploi du temps', icon: 'Calendar' },
+  { href: '/teacher/exams', label: 'Examens & Quizz', icon: 'GraduationCap' },
+  { href: '/teacher/rh', label: 'Espace RH', icon: 'Briefcase' },
   { href: '/settings', label: 'Paramètres', icon: 'Settings' },
 ];
 
@@ -149,4 +153,12 @@ export const MENU_ADMIN = [
   { href: '/admin/requests', label: 'Requêtes', icon: 'HelpCircle' },
   { href: '/admin/messaging', label: 'Messagerie', icon: 'MessageSquare' },
   { href: '/admin/statistics', label: 'Statistiques', icon: 'BarChart3' },
+  { href: '/admin/library', label: 'Bibliothèque / CDI', icon: 'BookOpen' },
+  { href: '/admin/rh', label: 'Ressources Humaines', icon: 'Briefcase' },
+];
+
+export const MENU_PARENT = [
+  { href: '/parent/dashboard', label: 'Mes Enfants', icon: 'Users' },
+  { href: '/parent/messaging', label: 'Messagerie', icon: 'MessageSquare' },
+  { href: '/settings', label: 'Paramètres', icon: 'Settings' },
 ];

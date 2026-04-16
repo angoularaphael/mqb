@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 /** Exécuté dans le <head> : le <body> n’existe pas encore, on ne cible que <html>. */
-const themeInitScript = `(function(){try{var d=document.documentElement,s=localStorage.getItem('mqb_theme'),dark=s!=='light';d.classList.toggle('dark',dark);}catch(e){}})();`;
+const themeInitScript = `(function(){try{var d=document.documentElement,s=localStorage.getItem('mqb_theme')||'dark';if(s==='system'){var dark=window.matchMedia('(prefers-color-scheme:dark)').matches;d.classList.toggle('dark',dark);}else{d.classList.toggle('dark',s==='dark');}}catch(e){}})();`;
 
 export default function RootLayout({
   children,

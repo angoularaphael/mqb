@@ -231,3 +231,170 @@ export const activity_logs = sqliteTable('activity_logs', {
   description: text('description'),
   created_at: integer('created_at').default(sql`(unixepoch())`),
 });
+
+// ============================================================
+// ---- MODULE: PORTAIL PARENT ----
+// ============================================================
+export const parents = sqliteTable('parents', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  email: text('email').unique().notNull(),
+  password_hash: text('password_hash').notNull(),
+  first_name: text('first_name').notNull(),
+  last_name: text('last_name').notNull(),
+  phone: text('phone'),
+  is_active: integer('is_active').default(1),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+  updated_at: integer('updated_at').default(sql`(unixepoch())`),
+});
+
+export const parent_students = sqliteTable('parent_students', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  parent_id: text('parent_id').notNull().references(() => parents.id, { onDelete: 'cascade' }),
+  student_id: text('student_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+}, (table) => ({
+  unique_parent_student: unique().on(table.parent_id, table.student_id),
+}));
+
+// ============================================================
+// ---- MODULE: FINANCES & FACTURATION ----
+// ============================================================
+export const invoices = sqliteTable('invoices', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  student_id: text('student_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  description: text('description').notNull(),
+  amount: real('amount').notNull(),
+  status: text('status').notNull().default('pending'), // pending, paid, overdue
+  due_date: text('due_date').notNull(), // YYYY-MM-DD
+  paid_date: text('paid_date'),
+  created_by: text('created_by').references(() => users.id),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+  updated_at: integer('updated_at').default(sql`(unixepoch())`),
+});
+
+export const payments = sqliteTable('payments', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  invoice_id: text('invoice_id').notNull().references(() => invoices.id, { onDelete: 'cascade' }),
+  amount: real('amount').notNull(),
+  method: text('method').notNull().default('cash'), // cash, bank, card, check
+  reference: text('reference'),
+  paid_at: integer('paid_at').default(sql`(unixepoch())`),
+  recorded_by: text('recorded_by').references(() => users.id),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+});
+
+// ============================================================
+// ---- MODULE: BIBLIOTHÈQUE / CDI ----
+// ============================================================
+export const library_items = sqliteTable('library_items', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  title: text('title').notNull(),
+  author: text('author'),
+  isbn: text('isbn'),
+  type: text('type').notNull().default('book'), // book, digital, material
+  category: text('category'),
+  quantity: integer('quantity').notNull().default(1),
+  available: integer('available').notNull().default(1),
+  cover_url: text('cover_url'),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+});
+
+export const library_loans = sqliteTable('library_loans', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  item_id: text('item_id').notNull().references(() => library_items.id, { onDelete: 'cascade' }),
+  student_id: text('student_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  borrowed_at: integer('borrowed_at').default(sql`(unixepoch())`),
+  due_date: text('due_date').notNull(), // YYYY-MM-DD
+  returned_at: integer('returned_at'),
+  status: text('status').notNull().default('active'), // active, returned, overdue
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+});
+
+// ============================================================
+// ---- MODULE: EXAMENS & QUIZZ ----
+// ============================================================
+export const exams = sqliteTable('exams', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  title: text('title').notNull(),
+  description: text('description'),
+  course_id: text('course_id').notNull().references(() => courses.id, { onDelete: 'cascade' }),
+  teacher_id: text('teacher_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: text('type').notNull().default('qcm'), // qcm, open, mixed
+  duration_minutes: integer('duration_minutes').notNull().default(60),
+  start_date: text('start_date'), // YYYY-MM-DDTHH:MM
+  end_date: text('end_date'),
+  is_published: integer('is_published').default(0),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+});
+
+export const exam_questions = sqliteTable('exam_questions', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  exam_id: text('exam_id').notNull().references(() => exams.id, { onDelete: 'cascade' }),
+  question_text: text('question_text').notNull(),
+  type: text('type').notNull().default('multiple_choice'), // multiple_choice, open
+  points: real('points').notNull().default(1),
+  order_index: integer('order_index').notNull().default(0),
+});
+
+export const exam_choices = sqliteTable('exam_choices', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  question_id: text('question_id').notNull().references(() => exam_questions.id, { onDelete: 'cascade' }),
+  choice_text: text('choice_text').notNull(),
+  is_correct: integer('is_correct').notNull().default(0),
+});
+
+export const exam_submissions = sqliteTable('exam_submissions', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  exam_id: text('exam_id').notNull().references(() => exams.id, { onDelete: 'cascade' }),
+  student_id: text('student_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  started_at: integer('started_at').default(sql`(unixepoch())`),
+  submitted_at: integer('submitted_at'),
+  score: real('score'),
+  status: text('status').notNull().default('in_progress'), // in_progress, submitted, graded
+});
+
+export const exam_answers = sqliteTable('exam_answers', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  submission_id: text('submission_id').notNull().references(() => exam_submissions.id, { onDelete: 'cascade' }),
+  question_id: text('question_id').notNull().references(() => exam_questions.id, { onDelete: 'cascade' }),
+  selected_choice_id: text('selected_choice_id').references(() => exam_choices.id),
+  open_answer: text('open_answer'),
+  points_awarded: real('points_awarded'),
+});
+
+// ============================================================
+// ---- MODULE: RH & POINTAGE ENSEIGNANT ----
+// ============================================================
+export const teacher_contracts = sqliteTable('teacher_contracts', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  teacher_id: text('teacher_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: text('type').notNull().default('CDI'), // CDI, CDD, vacation
+  start_date: text('start_date').notNull(),
+  end_date: text('end_date'),
+  salary: real('salary'),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+  updated_at: integer('updated_at').default(sql`(unixepoch())`),
+});
+
+export const teacher_leaves = sqliteTable('teacher_leaves', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  teacher_id: text('teacher_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  type: text('type').notNull().default('vacation'), // vacation, sick, personal
+  start_date: text('start_date').notNull(),
+  end_date: text('end_date').notNull(),
+  reason: text('reason'),
+  status: text('status').notNull().default('pending'), // pending, approved, rejected
+  approved_by: text('approved_by').references(() => users.id),
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+  updated_at: integer('updated_at').default(sql`(unixepoch())`),
+});
+
+export const teacher_clock = sqliteTable('teacher_clock', {
+  id: text('id').primaryKey().default(sql`(uuid())`),
+  teacher_id: text('teacher_id').notNull().references(() => users.id, { onDelete: 'cascade' }),
+  clock_in: integer('clock_in').notNull(),
+  clock_out: integer('clock_out'),
+  date: text('date').notNull(), // YYYY-MM-DD
+  created_at: integer('created_at').default(sql`(unixepoch())`),
+});
+

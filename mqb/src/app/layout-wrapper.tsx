@@ -8,6 +8,8 @@ import { logoutAction } from '@/app/actions/auth';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { RoleNavBar } from '@/components/nav-bar';
+import { fetchApi } from '@/lib/fetch-api';
+import { Mail, X } from 'lucide-react';
 
 interface AppLayoutProps {
   children: ReactNode;
@@ -18,13 +20,38 @@ export function AppLayoutWrapper({ children, user }: AppLayoutProps) {
   const router = useRouter();
   const [sessionTime, setSessionTime] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [lastMessageId, setLastMessageId] = useState<string | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [latestMsg, setLatestMsg] = useState<any>(null);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setSessionTime((prev) => prev + 1);
     }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+
+    const checkNewMessages = async () => {
+      if (!user) return;
+      try {
+        const data = await fetchApi<{unreadCount: number, latestMessage: any}>('/api/messaging/notifications');
+        if (data.latestMessage && data.latestMessage.id !== lastMessageId) {
+          if (lastMessageId !== null) { // Don't show on first load
+            setLatestMsg(data.latestMessage);
+            setShowPopup(true);
+            // Hide after 5 seconds
+            setTimeout(() => setShowPopup(false), 5000);
+          }
+          setLastMessageId(data.latestMessage.id);
+        }
+      } catch (e) {}
+    };
+
+    const msgInterval = setInterval(checkNewMessages, 30000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(msgInterval);
+    };
+  }, [user, lastMessageId]);
 
   const handleLogout = async () => {
     await logoutAction();
@@ -123,6 +150,47 @@ export function AppLayoutWrapper({ children, user }: AppLayoutProps) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {children}
       </main>
+
+      {/* Notification Popup */}
+      {showPopup && latestMsg && (
+        <motion.div
+          initial={{ opacity: 0, x: 100, scale: 0.9 }}
+          animate={{ opacity: 1, x: 0, scale: 1 }}
+          exit={{ opacity: 0, x: 100, scale: 0.9 }}
+          className="fixed bottom-8 right-8 z-[100] max-w-sm w-full bg-card border border-primary/20 shadow-2xl rounded-2xl overflow-hidden"
+        >
+          <div className="p-4 flex gap-4">
+            <div className="bg-primary/10 p-3 rounded-xl h-fit">
+              <Mail className="text-primary w-6 h-6" />
+            </div>
+            <div className="flex-1">
+              <div className="flex justify-between items-start">
+                <h4 className="font-bold text-sm">Nouveau message</h4>
+                <button onClick={() => setShowPopup(false)} className="text-muted-foreground hover:text-foreground">
+                  <X size={16} />
+                </button>
+              </div>
+              <p className="text-sm font-semibold mt-1 truncate">{latestMsg.title || '(Sans titre)'}</p>
+              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{latestMsg.content}</p>
+              <Link 
+                href={user?.role === 'teacher' ? '/teacher/messaging' : user?.role === 'parent' ? '/parent/messaging' : '/student/messaging'}
+                onClick={() => setShowPopup(false)}
+                className="inline-block mt-3 text-xs font-bold text-primary hover:underline"
+              >
+                Voir le message &rarr;
+              </Link>
+            </div>
+          </div>
+          <div className="h-1 bg-primary/20 w-full overflow-hidden">
+             <motion.div 
+               initial={{ width: '100%' }} 
+               animate={{ width: '0%' }} 
+               transition={{ duration: 5 }} 
+               className="h-full bg-primary" 
+             />
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }
