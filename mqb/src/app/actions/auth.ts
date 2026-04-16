@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db/index';
-import { users, password_reset_tokens, parents } from '@/db/schema';
+import { users, password_reset_tokens } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { generateJWT, setAuthCookie, clearAuthCookie, getCurrentUser } from '@/lib/auth';
 import { verifyPassword, hashPassword } from '@/lib/db-client';

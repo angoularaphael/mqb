@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, ArrowRight, Loader2, GraduationCap, BookOpen, ShieldCheck, Clock, Globe } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, Loader2, GraduationCap, BookOpen, Clock, Globe } from 'lucide-react';
 import { loginAction } from '@/app/actions/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ThemeSwitcher } from '@/components/theme-switcher';
@@ -12,6 +12,7 @@ import { t, getStoredLocale, setStoredLocale, type Locale } from '@/lib/i18n';
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const type = searchParams.get('type');
   const portalType: 'student' | 'teacher' = 
     type === 'teacher' ? 'teacher' : 'student';
 
@@ -41,10 +42,10 @@ function LoginForm() {
   const isTeacher = portalType === 'teacher';
   const isParent = false;
   
-  const Icon = isTeacher ? BookOpen : isParent ? ShieldCheck : GraduationCap;
-  const accentColor = isTeacher ? 'bg-secondary/10' : isParent ? 'bg-accent/10' : 'bg-primary/10';
-  const iconColor = isTeacher ? 'text-secondary' : isParent ? 'text-accent' : 'text-primary';
-  const buttonColor = isTeacher ? 'bg-secondary hover:opacity-90' : isParent ? 'bg-accent hover:opacity-90' : 'bg-primary hover:opacity-90';
+  const Icon = isTeacher ? BookOpen : GraduationCap;
+  const accentColor = isTeacher ? 'bg-secondary/10' : 'bg-primary/10';
+  const iconColor = isTeacher ? 'text-secondary' : 'text-primary';
+  const buttonColor = isTeacher ? 'bg-secondary hover:opacity-90' : 'bg-primary hover:opacity-90';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
