@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/index';
-import { exams, exam_questions, exam_choices, exam_submissions, courses } from '@/db/schema';
-import { eq, desc, and } from 'drizzle-orm';
+import { exams, exam_questions, exam_choices, courses } from '@/db/schema';
+import { eq, desc } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/auth';
 import { v4 as uuid } from 'uuid';
 

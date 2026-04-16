@@ -24,7 +24,7 @@ export async function GET() {
 
     // Filter exams whose course belongs to student's groups
     const filtered = groupIds.length > 0
-      ? allExams.filter(e => {
+      ? allExams.filter(_e => {
           // For simplicity, show all published exams (course group check can be added)
           return true;
         })

@@ -5,7 +5,7 @@ import { eq, and } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/auth';
 import { v4 as uuid } from 'uuid';
 
-export async function POST(req: NextRequest) {
+export async function POST(_req: NextRequest) {
   try {
     const user = await getCurrentUser();
     

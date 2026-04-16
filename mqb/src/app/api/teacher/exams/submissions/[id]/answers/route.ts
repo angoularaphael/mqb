@@ -4,7 +4,7 @@ import { exam_answers } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/auth';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const user = await getCurrentUser();
     if (!user || (user.role !== 'teacher' && user.role !== 'admin')) {

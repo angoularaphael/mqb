@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRouter, useParams } from 'next/navigation';
 import { getCurrentUserAction } from '@/app/actions/auth';
 import { fetchApi } from '@/lib/fetch-api';
@@ -16,7 +16,7 @@ import {
 export default function TakeExamPage() {
   const router = useRouter();
   const params = useParams();
-  const [user, setUser] = useState<any>(null);
+  const [, setUser] = useState<any>(null);
   const [exam, setExam] = useState<any>(null);
   const [questions, setQuestions] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);

@@ -11,7 +11,6 @@ import {
   GraduationCap, 
   Calendar, 
   Clock, 
-  ClipboardList,
   CheckCircle2,
   AlertCircle,
   Clock3

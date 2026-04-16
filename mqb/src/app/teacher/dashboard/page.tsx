@@ -18,6 +18,7 @@ type InboxItem = {
   preview: string;
   date: string;
   read: boolean;
+  type?: 'direct' | 'broadcast';
 };
 
 type Sch = {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRouter, useParams } from 'next/navigation';
 import { getCurrentUserAction } from '@/app/actions/auth';
 import { AppLayoutWrapper } from '@/app/layout-wrapper';

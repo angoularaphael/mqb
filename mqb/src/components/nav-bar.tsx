@@ -12,10 +12,7 @@ import {
   Calendar, 
   MessageSquare, 
   FileText, 
-  BarChart, 
-  UserCheck,
-  Building,
-  HelpCircle
+  UserCheck
 } from 'lucide-react';
 
 import { useState, useEffect } from 'react';

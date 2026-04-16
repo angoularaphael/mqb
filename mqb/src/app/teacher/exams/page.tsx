@@ -53,14 +53,21 @@ export default function TeacherExamsPage() {
 
   const loadData = async () => {
     try {
-      const [examsData, coursesData] = await Promise.all([
-        fetchApi<{ exams: any[] }>('/api/teacher/exams'),
-        fetchApi<{ courses: any[] }>('/api/teacher/courses') // Assuming this exists or using admin meta
-      ]).catch(async () => {
-        // Fallback for courses if specifically teacher/courses fails
-        const meta = await fetchApi<{ courses: any[] }>('/api/admin/meta');
-        return [await fetchApi<{ exams: any[] }>('/api/teacher/exams'), meta];
-      });
+      let examsData = { exams: [] as any[] };
+      let coursesData = { courses: [] as any[] };
+      try {
+        const [ex, co] = await Promise.all([
+          fetchApi<{ exams: any[] }>('/api/teacher/exams'),
+          fetchApi<{ courses: any[] }>('/api/teacher/courses')
+        ]);
+        examsData = ex;
+        coursesData = co;
+      } catch (e) {
+        const meta = await fetchApi<{ courses: any[] }>('/api/admin/meta').catch(() => ({ courses: [] }));
+        const ex = await fetchApi<{ exams: any[] }>('/api/teacher/exams').catch(() => ({ exams: [] }));
+        examsData = ex;
+        coursesData = meta;
+      }
       
       setExams(examsData.exams || []);
       setCourses(coursesData.courses || []);

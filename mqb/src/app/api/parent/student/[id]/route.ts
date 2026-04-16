@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/index';
 import { users, attendance, grades, courses, schedules, rooms } from '@/db/schema';
-import { eq, and, desc } from 'drizzle-orm';
+import { eq, desc } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/auth';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(_req: NextRequest, { params }: { params: { id: string } }) {
   try {
     const user = await getCurrentUser();
     if (!user || user.role !== 'parent') {
@@ -24,8 +24,6 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     const studentGrades = await db.select({
       id: grades.id,
       score: grades.score,
-      maxScore: grades.max_score,
-      weight: grades.weight,
       feedback: grades.feedback,
       date: grades.created_at,
       courseName: courses.name
@@ -36,7 +34,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     .orderBy(desc(grades.created_at));
 
     // 3. Get attendance
-    const studentAttendance = await db.select().from(attendance).where(eq(attendance.student_id, studentId)).orderBy(desc(attendance.created_at));
+    const studentAttendance = await db.select().from(attendance).where(eq(attendance.student_id, studentId)).orderBy(desc(attendance.marked_at));
 
     // 4. Get schedule
     // First find groups the student is in

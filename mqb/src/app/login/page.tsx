@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Eye, EyeOff, ArrowRight, Loader2, GraduationCap, BookOpen, Clock, Globe } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, Loader2, GraduationCap, BookOpen, Clock, Globe, ShieldCheck } from 'lucide-react';
 import { loginAction } from '@/app/actions/auth';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { ThemeSwitcher } from '@/components/theme-switcher';
@@ -40,7 +40,7 @@ function LoginForm() {
   };
 
   const isTeacher = portalType === 'teacher';
-  const isParent = false;
+
   
   const Icon = isTeacher ? BookOpen : GraduationCap;
   const accentColor = isTeacher ? 'bg-secondary/10' : 'bg-primary/10';
