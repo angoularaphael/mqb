@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db/index';
 import { teacher_clock, teacher_contracts, teacher_leaves, users } from '@/db/schema';
-import { eq, and } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 import { getCurrentUser } from '@/lib/auth';
 import { v4 as uuid } from 'uuid';
 
